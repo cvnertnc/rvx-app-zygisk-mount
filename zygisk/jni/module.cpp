@@ -36,7 +36,7 @@ static bool sendProcInfo(int fd, const char* proc) {
     return true;
 }
 
-class RVMMZygiskMount : public zygisk::ModuleBase {
+class RVXZygiskMount : public zygisk::ModuleBase {
    public:
     void onLoad(zygisk::Api* api, JNIEnv* env) override {
         this->api = api;
@@ -203,5 +203,5 @@ static void companionHandler(int fd) {
     }
 }
 
-REGISTER_ZYGISK_MODULE(RVMMZygiskMount)
+REGISTER_ZYGISK_MODULE(RVXZygiskMount)
 REGISTER_ZYGISK_COMPANION(companionHandler)

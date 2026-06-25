@@ -6,7 +6,7 @@ fi
 
 . "$MODPATH/util.sh"
 
-if [ -z "$(collect_rvmm)" ]; then
+if [ -z "$(collect_rvx)" ]; then
 	ui_print "* No rvx-app is installed."
 	ui_print "  Go install the modules you want first,"
 	ui_print "  then flash this module."

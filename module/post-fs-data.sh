@@ -3,8 +3,8 @@
 MODDIR=${0%/*}
 . "$MODDIR/util.sh"
 
-collect_rvmm | while IFS= read -r rvmm_path; do
-	: >"$rvmm_path/disable"
-	[ -f "$rvmm_path/err" ] || cp -f "$rvmm_path/module.prop" "$rvmm_path/err"
-	sed -i "s/^des.*/description=⚠️ Keep this module disabled. Mounting is being handled by rvx-zygisk-mount./g" "$rvmm_path/module.prop"
+collect_rvx | while IFS= read -r rvx_path; do
+	: >"$rvx_path/disable"
+	[ -f "$rvx_path/err" ] || cp -f "$rvx_path/module.prop" "$rvx_path/err"
+	sed -i "s/^des.*/description=⚠️ Keep this module disabled. Mounting is being handled by rvx-zygisk-mount./g" "$rvx_path/module.prop"
 done
