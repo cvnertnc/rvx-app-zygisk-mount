@@ -1,7 +1,8 @@
-id=rvmm-zygisk-mount
-name=rvmm-zygisk-mount
+id=rvx-app-zygisk-mount
+name=rvx-app-zygisk-mount
 version=v9
 versionCode=9
-author=j-hc
-description=Mounts the RVMM (revanced-magisk-module) modules with Zygisk
-updateJson=https://raw.githubusercontent.com/j-hc/rvmm-zygisk-mount/master/update.json
+author=j-hc & cvnertnc
+banner=https://raw.githubusercontent.com/cvnertnc/rvx-app/main/module/banner.png
+description=Mounts the RVX-App (rvx-app) modules with Zygisk
+updateJson=https://raw.githubusercontent.com/cvnertnc/rvx-app-zygisk-mount/master/update.json

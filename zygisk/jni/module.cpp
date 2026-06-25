@@ -13,7 +13,7 @@
 
 #define ARR_LEN(a) (sizeof(a) / (sizeof((a)[0])))
 #define LOGD(fmt, ...) \
-    __android_log_print(ANDROID_LOG_DEBUG, "rvmm-zygisk-mount", "[%d] " fmt, __LINE__, ##__VA_ARGS__)
+    __android_log_print(ANDROID_LOG_DEBUG, "rvx-app-zygisk-mount", "[%d] " fmt, __LINE__, ##__VA_ARGS__)
 
 static bool sendProcInfo(int fd, const char* proc) {
     pid_t pid = getpid();
@@ -36,7 +36,7 @@ static bool sendProcInfo(int fd, const char* proc) {
     return true;
 }
 
-class RVMMZygiskMount : public zygisk::ModuleBase {
+class RVXAPPZygiskMount : public zygisk::ModuleBase {
    public:
     void onLoad(zygisk::Api* api, JNIEnv* env) override {
         this->api = api;
@@ -178,7 +178,7 @@ static bool receiveProcInfo(int fd, const char** src, const char** dst, pid_t* p
         return false;
     }
 
-    char* procs_map = readFileToNullStr("/data/adb/modules/rvmm-zygisk-mount/procs_map");
+    char* procs_map = readFileToNullStr("/data/adb/modules/rvx-app-zygisk-mount/procs_map");
     if (procs_map == nullptr) return false;
 
     bool r = getMountSrcDst(procs_map, proc, src, dst);
@@ -203,5 +203,5 @@ static void companionHandler(int fd) {
     }
 }
 
-REGISTER_ZYGISK_MODULE(RVMMZygiskMount)
+REGISTER_ZYGISK_MODULE(RVXAPPZygiskMount)
 REGISTER_ZYGISK_COMPANION(companionHandler)
