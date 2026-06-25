@@ -9,8 +9,8 @@ assignees: ''
 
 **Android version and ROM:**
 
-**Logs taken with `su -c logcat -d -s "rvx-app-zygisk-mount"`:**
+**Logs taken with `su -c logcat -d -s "rvmm-zygisk-mount"`:**
 
-**rvx-app-zygisk-mount module flash logs:**
+**rvmm-zygisk-mount module flash logs:**
 
 Not providing any of these information will get your issue closed without any response!

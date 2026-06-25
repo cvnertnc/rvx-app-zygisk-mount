@@ -1,37 +1,37 @@
 #!/system/bin/sh
 
-is_valid_rvxapp() {
+is_valid_rvmm() {
 	if [ ! -d "$1" ]; then return 1; fi
 	if ! grep -Fq "j-hc" "$1/module.prop"; then return 1; fi
 	if [ ! -f "$1/config" ]; then return 1; fi
 	return 0
 }
 
-collect_rvxapp() {
-	for RVXAPP in /data/adb/modules_update/*-cvnertnc*; do
-		if ! is_valid_rvxapp "$RVXAPP"; then continue; fi
+collect_rvmm() {
+	for RVMM in /data/adb/modules_update/*-jhc*; do
+		if ! is_valid_rvmm "$RVMM"; then continue; fi
 
-		MPATH=$(echo "$RVXAPP" | sed 's/modules_update/modules/')
+		MPATH=$(echo "$RVMM" | sed 's/modules_update/modules/')
 		if [ -f "$MPATH/remove" ]; then continue; fi
 
-		echo "$RVXAPP"
+		echo "$RVMM"
 	done
 
-	for RVXAPP in /data/adb/modules/*-cvnertnc*; do
-		if ! is_valid_rvxapp "$RVXAPP"; then continue; fi
+	for RVMM in /data/adb/modules/*-jhc*; do
+		if ! is_valid_rvmm "$RVMM"; then continue; fi
 		if [ -f "$MPATH/remove" ]; then continue; fi
 
-		MUPATH=$(echo "$RVXAPP" | sed 's/modules/modules_update/')
+		MUPATH=$(echo "$RVMM" | sed 's/modules/modules_update/')
 		if [ -d "$MUPATH" ]; then continue; fi
 
-		echo "$RVXAPP"
+		echo "$RVMM"
 	done
 }
 
 create_procs_map() {
 	: >"$1/procs_map"
-	collect_rvxapp | while IFS= read -r rvxapp_path; do
-		. "$RVXAPP_path/config"
+	collect_rvmm | while IFS= read -r rvmm_path; do
+		. "$rvmm_path/config"
 		if [ -z "$PKG_NAME" ]; then continue; fi
 
 		grep -F "$PKG_NAME" /proc/mounts | while read -r line; do
@@ -45,7 +45,7 @@ create_procs_map() {
 			ui_print "ERROR: $PKG_NAME is not installed. Re-flash its module and dont reboot."
 			continue
 		fi
-		RVPATH="/data/adb/rvhc/${rvxapp_path##*/}.apk"
+		RVPATH="/data/adb/rvhc/${rvmm_path##*/}.apk"
 		if [ ! -f "$RVPATH" ]; then
 			ui_print "ERROR: $RVPATH does not exist. Re-flash its module and dont reboot."
 			continue
@@ -63,8 +63,8 @@ create_procs_map() {
 disable_unmount_modules() {
 	if magisk --denylist status >/dev/null 2>&1; then MGSK="mgsk"; fi
 
-	collect_rvxapp | while IFS= read -r rvxapp_path; do
-		. "$RVXAPP_path/config"
+	collect_rvmm | while IFS= read -r rvmm_path; do
+		. "$rvmm_path/config"
 		if [ -z "$PKG_NAME" ]; then continue; fi
 
 		if [ "$KSU" ]; then
