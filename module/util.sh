@@ -2,7 +2,7 @@
 
 is_valid_rvx() {
 	if [ ! -d "$1" ]; then return 1; fi
-	if ! grep -Fq "j-hc" "$1/module.prop"; then return 1; fi
+	if ! grep -Fq "cvnertnc" "$1/module.prop"; then return 1; fi
 	if [ ! -f "$1/config" ]; then return 1; fi
 	return 0
 }
