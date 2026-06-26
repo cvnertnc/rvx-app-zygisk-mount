@@ -4,5 +4,5 @@ version=v9
 versionCode=9
 author=j-hc & cvnertnc
 description=Mounts the RVX-App (rvx-app) modules with Zygisk
-banner=https://raw.githubusercontent.com/cvnertnc/rvx-app/main/module/banner.png
+banner=https://raw.githubusercontent.com/cvnertnc/rvx-zygisk-mount/master/module/banner.png
 updateJson=https://raw.githubusercontent.com/cvnertnc/rvx-zygisk-mount/master/update.json
